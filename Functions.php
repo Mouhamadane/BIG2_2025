@@ -23,7 +23,7 @@ function TabPremier(){
     $tab=[];
     for ($i=1; $i <=100; $i++) { 
         if (isPremier($i)) {
-            array_push($tab, $i);
+            array_push($tab, $i); //   $tab[] = $i;
         }
     }
     return $tab;

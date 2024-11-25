@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+</head>
+<body>
+    <form action="#" method="post" onsubmit="return false;">
+        <input type="text" id="num" placeholder="Enter first number">
+        <input type="text" id="op" placeholder="Enter operator (+, -, *, /)">
+        <input type="text" id="num2" placeholder="Enter second number">
+        <button id="calculate">Calculate</button>
+    </form>
+    <p>Result: <span id="result"></span></p>
+
+    <script>
+        document.getElementById("calculate").addEventListener("click", function () {
+            let num = parseFloat(document.getElementById("num").value); // parseFloat permet de convertir une var en Float
+            let num2 = parseFloat(document.getElementById("num2").value);
+            let op = document.getElementById("op").value;
+            let result;
+
+            switch (op) {
+                case "+":
+                    result = num + num2;
+                    break;
+                case "-":
+                    result = num - num2;
+                    break;
+                case "*":
+                    result = num * num2;
+                    break;
+                case "/":
+                    result = num2 !== 0 ? num / num2 : "Error: Division by zero";
+                    break;
+                default:
+                    result = "Error: Invalid operator";
+            }
+
+            document.getElementById("result").innerText = result;
+        });
+    </script>
+</body>
+</html>

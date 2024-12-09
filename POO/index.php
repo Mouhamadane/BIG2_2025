@@ -1,20 +1,46 @@
 <?php
 
 require_once("Etudiant.php");
+require_once("connexion.php");
 
-// Instaciation avec surcharge
-$tab = ["id"=> "221", "prenom"=>"Modou", "nom"=>"Fall"];
-$etudiant = new Etudiant($tab);
+$email =$_POST["email"];
+$password =$_POST["password"];
 
-// Modification de l'ID avec le setter setId()
-$etudiant->setId("250");
-$etudiant->setPrenom("Fama").
-var_dump($etudiant);
+$sql = "SELECT * FROM etudiant WHERE email = ? AND password = ?";
 
-echo "<br>";
-echo "<br>";
-echo "<br>";
+$query = $connect->prepare($sql);
 
-// Instanciation d'un autre objet 
-$etudiant2 = new Etudiant();
-var_dump($etudiant2);
+
+$testResult = $query->execute([$email, $password]);
+
+if($testResult){ // if($testResult == true)
+    $result = $query->fetch();
+
+    if($result){
+        header("Location: accueil.php");
+    } else {
+        echo "Mot de pass incorrect";
+    }
+
+} else {
+    echo "La requête a échoué";
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+        <input type="text" name="email" id="" placeholder="Email">
+        <br>
+        <input type="password" name="password" id="" placeholder="Password">
+        <br>
+        <button type="submit">Connexion</button>
+    </form>
+</body>
+</html>
